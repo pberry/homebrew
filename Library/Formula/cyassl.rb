@@ -2,8 +2,8 @@ require 'formula'
 
 class Cyassl < Formula
   homepage 'http://yassl.com/yaSSL/Products-cyassl.html'
-  url 'https://github.com/cyassl/cyassl/archive/v2.6.0.tar.gz'
-  sha256 '61735c47e14065162986579d866ea7bd98af30e0e6bb5ac34367122ba1959b62'
+  url 'https://github.com/cyassl/cyassl/archive/v2.7.0.tar.gz'
+  sha256 'fa3aebfe8d5304e283b91cd83cd211dd3239243101e9e618d034cd475d7bbe54'
 
   head 'https://github.com/cyassl/cyassl.git'
 
@@ -17,35 +17,38 @@ class Cyassl < Formula
     args = %W[--infodir=#{info}
               --mandir=#{man}
               --prefix=#{prefix}
+              --disable-bump
+              --disable-fortress
+              --disable-ntru
+              --disable-sniffer
+              --disable-webserver
               --enable-aesccm
               --enable-aesgcm
+              --enable-blake2
               --enable-camellia
               --enable-certgen
               --enable-crl
               --enable-crl-monitor
               --enable-dtls
-              --enable-fortress
+              --enable-ecc
+              --enable-filesystem
               --enable-hc128
+              --enable-inline
               --enable-keygen
+              --enable-md4
               --enable-ocsp
-              --enable-opensslExtra
+              --enable-opensslextra
               --enable-psk
               --enable-rabbit
               --enable-ripemd
               --enable-sha512
-              --enable-sniffer
-              --disable-ecc
-              --disable-noFilesystem
-              --disable-noInline
-              --disable-ntru
-              --disable-webServer
-              --with-libz
+              --enable-sni
     ]
 
     if MacOS.prefer_64_bit?
-      args << '--enable-fastmath' << '--enable-fasthugemath' << '--enable-bump'
+      args << '--enable-fastmath' << '--enable-fasthugemath'
     else
-      args << '--disable-fastmath' << '--disable-fasthugemath' << '--disable-bump'
+      args << '--disable-fastmath' << '--disable-fasthugemath'
     end
 
     # Extra flag is stated as a needed for the Mac platform.
